@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Main Page</title>
+  </head>
+  <body>
+    <div class="main">
+
+      <div class="upper"></div>
+
+      <div class="title">
+        <p>Movie Catalogue</p>
+      </div>
+
+      <div class="middle">
+        <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search"/>
+        <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
+      </div>
+
+      <div class="result">
+
+        <div class="poster">
+          <img src="../assets/poster.jpg" class="movie">
+        </div>
+
+        <div class="information">
+            <h3 class="MovieTitle"><b>Title:</b>Avengers End Game</h3>
+            <p class="year"><b>Year:</b>2020</p>
+            <p class="rate"><b>Ratings:</b> PG-13</p>
+            <p class="release"><b>Released:</b> 05 May 2020</p>
+            <p class="genre"><b>Genre:</b> Action, Adventure, Comedy</p>
+            <p class="writer"><b>Writer:</b> abc x, ddjw c, wdwd cs</p>
+            <p class="actors"><b>Actors: </b>jkdnqd ed,eqfqf, ewfe,fe,fqw,feqf,f,w</p>
+            <p class="plot"><b>Plot:</b> qweray sgjhdb ewefw fwf wfw fwe fw wf wvw fw fw fw efw fwvwfvwrvwfjbnwkvg kev ekv ekjv kewrjbnkrwegvk vkwjbrgk vkwrvknlrw nbvlrw</p>
+            <p class="languages"><b>Languages:</b> a, b, c, d</p>
+            <p class="awards"><b>Awards:</b>abc, xyz, rtfm </p>
+        </div>
+
+      </div>
+
+      </div>
+  </body>
+</html>
