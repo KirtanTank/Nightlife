@@ -16,27 +16,29 @@
         <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
       </div>
 
-      <div class="result">
-
-        <div class="poster">
-          <img src="../assets/poster.jpg" class="movie">
+      <div class="search-container">
+        <div class="result" >
+          <div class="internal" (click)="pop()" *ngFor="let i of array | paginate : {itemsPerPage: perPage, currentPage: page}">
+            <div class="poster">
+              <img [src]="displayPoster(i.poster_path)"  class="movie">
+            </div>
+  
+            <div class="information">
+                <h3 class="MovieTitle">{{i.title}}</h3>
+                <p class="year">{{i.release_date}}</p>
+            </div>
+          </div>
         </div>
 
-        <div class="information">
-            <h3 class="MovieTitle"><b>Title:</b>Avengers End Game</h3>
-            <p class="year"><b>Year:</b>2020</p>
-            <p class="rate"><b>Ratings:</b> PG-13</p>
-            <p class="release"><b>Released:</b> 05 May 2020</p>
-            <p class="genre"><b>Genre:</b> Action, Adventure, Comedy</p>
-            <p class="writer"><b>Writer:</b> abc x, ddjw c, wdwd cs</p>
-            <p class="actors"><b>Actors: </b>jkdnqd ed,eqfqf, ewfe,fe,fqw,feqf,f,w</p>
-            <p class="plot"><b>Plot:</b> qweray sgjhdb ewefw fwf wfw fwe fw wf wvw fw fw fw efw fwvwfvwrvwfjbnwkvg kev ekv ekjv kewrjbnkrwegvk vkwjbrgk vkwrvknlrw nbvlrw</p>
-            <p class="languages"><b>Languages:</b> a, b, c, d</p>
-            <p class="awards"><b>Awards:</b>abc, xyz, rtfm </p>
+        <div class="page">
+          <pagination-controls class="control" (pageChange)="page = $event"></pagination-controls>
         </div>
 
       </div>
 
+      <div class="pop" *ngIf="ok">
+        <ng-container *ngComponentOutlet="comp"></ng-container>
       </div>
+    </div>
   </body>
 </html>
