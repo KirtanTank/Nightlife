@@ -3,6 +3,14 @@
     padding-top: 0;
 }
 
+html,body{
+    height: 100%
+}
+
+body{
+    padding-bottom: 10px;    /* height of footer */
+}
+
 .upper{
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.45)), url(/assets/bg.jpg);
     height: 250px;
@@ -19,6 +27,7 @@
     width: 100%;
     text-align: center;
     margin-top: 230px;
+    // background-color: black;
 }
 
 .search{
@@ -43,12 +52,13 @@
 .button{
     width: 120px;
     height: 50px;
-    background-color: rgb(0, 123, 255);
-    color: white;
+    background-color: rgb(255, 149, 0);
+    color: black;
     border-radius: 10px;
-    padding-top: 10px;
     cursor: pointer;
     margin: 10px;
+    font-size: 20px;
+
 }
 .result{
     color: black;
@@ -56,8 +66,6 @@
     display: flex;
     flex-direction: row;
     padding: 10px;
-    margin-top: 10px;
-    cursor: pointer;
     justify-content: center;
 }
 
@@ -72,19 +80,17 @@
 
 .movie{
     max-width: 200px;
-    border: 5px solid rgb(255, 179, 0);
+    height: 300px;
     border-radius: 10px;
     box-sizing: border-box;
-    box-shadow: white;
+    border: 5px solid rgb(255, 157, 0);
+    box-shadow: 20px 20px 50px black;
 
-    &:hover{
-        width: 190px;
-    }
 }
 
 .MovieTitle{
     font-size: 20px;
-    color: rgb(255, 183, 0);
+    color: black;
     max-width: 200px;
 }
 
@@ -96,7 +102,7 @@
 
 .year{
     font-size: 20px;
-    color: rgba(255, 255, 255, 0.731);
+    color: black;
     padding-top: 10px;
 }
 
@@ -105,8 +111,38 @@
     flex-direction: column;
     background-color: rgb(255, 255, 255);
     text-align: center;
+    top: 100;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.search-container{
-    background-color: black;
+.load{
+    position: fixed;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: opacity 0.75s, visibility 0.75s;
+
+    &::after{
+        content: "";
+        height: 75px;
+        width: 75px;
+        border: 10px solid black;
+        border-top-color: rgb(255, 179, 0);
+        border-radius: 50%;
+        animation: loading 1s ease infinite;
+    }
+
+    @keyframes loading {
+        from { transform: rotate(0turn); }
+        to { transform: rotate(1turn); }
+    }
+}
+
+.load--hidden{
+    opacity: 0;
+    visibility: hidden;
 }

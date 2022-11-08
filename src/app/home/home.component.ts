@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import axios, { Axios } from 'axios';
+import { Stream } from 'stream';
+
 
 @Component({
   selector: 'app-home',
@@ -14,14 +16,16 @@ export class HomeComponent implements OnInit {
   page : any = 1
   perPage : any = 4
   array : any;
-  poster : any = "https://www.themoviedb.org/t/p/w220_and_h330_face";
+  // poster : any = "https://www.themoviedb.org/t/p/w220_and_h330_face";
 
   comp = PopUpComponent;
-  internal = document.querySelector('internal')?.addEventListener('click', this.pop);
-  ok : boolean = false;
+  // internal = document.querySelector('internal')?.addEventListener('click', this.pop);
+  description : boolean = false;
+  show : boolean = false;
+  loader : boolean = true;
 
   pop(){
-    this.ok = true;
+    this.description = true;
     this.comp = PopUpComponent;
   }
   constructor() { }
@@ -31,18 +35,51 @@ export class HomeComponent implements OnInit {
 
   LoadMovie(searchTerm: any){
     searchTerm = this.search;
+    this.show = true;
     // const URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=266b4fd8`;
-    const URL = `https://api.themoviedb.org/3/movie/popular?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&page=1`;
-    axios.get(URL).then(response => {
-        this.array = response.data.results;
+    // const URL = `https://api.themoviedb.org/3/movie/popular?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&page=1`;
+    // axios.get(URL).then(response => {
+    //     this.array = response.data.results;
       
-    }).catch(err => {
-      console.log(err);
-    });
+    // }).catch(err => {
+    //   console.log(err);
+    // });
+
+    const a = document.querySelector('.load--hidden');
+
+    a?.classList.remove("load--hidden");
+    a?.classList.add("load");
+
+    setTimeout(() => {
+      a?.classList.remove("load");
+      a?.classList.add("load--hidden");
+    }, 3000);
+    a?.addEventListener("transitioned", ()=>{
+      document.body.removeChild(a);
+    })
+
+    const options = {
+      method: 'GET',
+      url: 'https://imdb8.p.rapidapi.com/auto-complete',
+      params: {q: searchTerm},
+      headers: {
+        'X-RapidAPI-Key': 'aa1ab1bbb3msh5297edcd4ffe1c0p19ae55jsnfaef7c87634a',
+        'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+      }
+    };
+    setTimeout(() => {
+      axios.request(options).then((response : any) => {
+        this.array = response.data.d;
+        console.log(this.array);
+      }).catch((err : any) => {
+        console.error(err);
+      });  
+    }, 3000);
   }
+  
 
   displayPoster(posterpath : any){
-    return `https://www.themoviedb.org/t/p/w220_and_h330_face${posterpath}`;
+      return posterpath;
   }
 
   // displayMovie(movies : any){
