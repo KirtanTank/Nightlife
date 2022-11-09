@@ -35,7 +35,9 @@ export class HomeComponent implements OnInit {
 
   LoadMovie(searchTerm: any){
     searchTerm = this.search;
-    this.show = true;
+    setTimeout(() => {
+      this.show = true;
+    }, 5000);
     // const URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=266b4fd8`;
     // const URL = `https://api.themoviedb.org/3/movie/popular?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&page=1`;
     // axios.get(URL).then(response => {
