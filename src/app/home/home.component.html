@@ -20,52 +20,80 @@
         <div class="result">
           <div class="load--hidden"></div>
           <div class="internal" (click)="pop()" *ngFor="let x of movieArray">
-            <div class="poster" *ngIf="x.i?.imageUrl != undefined; else noPoster">
+            <div class="poster" *ngIf="x.i?.imageUrl != undefined; else noPoster" (click)="getId(x.id)">
               <img [src]="displayPoster(x.i.imageUrl)" class="movie">
             </div>
-            <ng-template #noPoster>
+            <ng-template #noPoster (click)="getId(x.id)">
               <img src="../../assets/no-poster1.jpg" class="movie">
             </ng-template>
             
   
             <div class="information">
-                <h3 class="MovieTitle" *ngIf="x.l">{{x.l}}</h3>
-                <h4 class="year" *ngIf="x.y; else noYear">{{x.y}}</h4>
+                <h3 class="MovieTitle" *ngIf="x.l" (click)="getId(x.id)">{{x.l}}</h3>
+                <h4 class="year" *ngIf="x.y; else noYear" (click)="getId(x.id)">{{x.y}}</h4>
             </div>
-            <ng-template #noYear>
-              <h4 class="year">—</h4>
+            <ng-template #noYear (click)="getId(x.id)">
+              <h4 class="year" (click)="getId(x.id)">—</h4>
             </ng-template>
           </div>
         </div>
-
-          <!-- <div class="page" *ngIf="show">
-            <pagination-controls class="control" (pageChange)="page = $event"></pagination-controls>
-          </div> -->
       </div>
-
-      <!-- <div class="pop" *ngIf="description">
-        <ng-container *ngComponentOutlet="comp"></ng-container>
-      </div> -->
     </div>
 
 <!-- Information Show -->
     <div class="info" *ngIf="description">
         <div class="mainPoster">
-            <img src="../assets/poster.jpg" class="moviePoster">
+            <img src="{{poster}}" class="moviePoster" *ngIf="poster != undefined; else noPoster">
         </div>
+        <ng-template #noPoster>
+          <img src="../../assets/no-poster1.jpg" class="moviePoster">
+        </ng-template>
 
         <div class="description">
-            <h3 class="name"><b>Title:</b>Avengers End Game</h3>
-            <p class="dob"><b>Year:</b>2020</p>
-            <p class="rate"><b>Ratings:</b> PG-13</p>
-            <p class="release"><b>Released:</b> 05 May 2020</p>
-            <p class="genre"><b>Genre:</b> Action, Adventure, Comedy</p>
-            <p class="writer"><b>Writer:</b> abc x, ddjw c, wdwd cs</p>
-            <p class="actors"><b>Actors: </b>jkdnqd ed,eqfqf, ewfe,fe,fqw,feqf,f,w</p>
-            <p class="plot"><b>Plot:</b> I used to be very skeptical or uncomfortable using libraries, but after learning how to write carousel on my own helped me have confidence in using the library. I kinda know how it works underneath and helped me play around with optional parameters. I would suggest folks to try writing carousel yourself once from scratch without using libraries.</p>
-            <p class="languages"><b>Languages:</b> a, b, c, d</p>
-            <p class="awards"><b>Awards:</b>abc, xyz, rtfm </p>
+            <h3 class="name" *ngIf="name != undefined; else noName"><b>{{name}}</b></h3>
+            <p class="dob" *ngIf="year != undefined; else noDOB"><b>Year:</b>&nbsp;{{year}}</p>
+            <!-- <p class="rate" *ngIf="rate != undefined; else noRate"><b>Ratings:</b>&nbsp;PG-13</p> -->
+            <!-- <p class="release" *ngIf="release != undefined; else noRelease"><b>Released:</b>&nbsp;05 May 2020</p> -->
+            <!-- <p class="genre" *ngIf="gener != undefined; else noGenre"><b>Genre:</b>&nbsp;Action, Adventure, Comedy</p>
+            <p class="writer" *ngIf="writer != undefined; else noWriter"><b>Writer:</b>&nbsp;abc x, ddjw c, wdwd cs</p> -->
+            <p class="actors" *ngIf="actors != undefined; else noActors"><b>Actors:</b>&nbsp;{{actors}}</p>
+            <p class="plot" *ngIf="plot != undefined; else noPlot"><b>Plot:</b>&nbsp;{{plot}}</p>
+            <!-- <p class="languages" *ngIf="languages != undefined; else noLanguages"><b>Languages:</b>&nbsp;a, b, c, d</p>
+            <p class="awards" *ngIf="awards != undefined; else noAward"><b>Awards:</b>&nbsp;abc, xyz, rtfm </p> -->
         </div>
+        <ng-template #noName>
+          <h4 class="name">—</h4>
+        </ng-template>
+        <ng-template #noDOB>
+          <h4 class="dob"><b>Year:</b>&nbsp;—</h4>
+        </ng-template>
+        <!-- <ng-template #noRate>
+          <h4 class="rate">—</h4>
+        </ng-template>
+        <ng-template #noRelease>
+          <h4 class="release">—</h4>
+        </ng-template>
+        <ng-template #noGenre>
+          <h4 class="genre">—</h4>
+        </ng-template>
+        <ng-template #noWriter>
+          <h4 class="writer">—</h4>
+        </ng-template> -->
+        <ng-template #noActors>
+          <h4 class="actors"><b>Actors:</b>&nbsp;—</h4>
+        </ng-template>
+        <ng-template #noPlot>
+          <h4 class="plot"><b>Overview:</b>&nbsp;—</h4>
+        </ng-template>
+        <!-- <ng-template #noLanguages>
+          <h4 class="languages">—</h4>
+        </ng-template>
+        <ng-template #noAward>
+          <h4 class="awards">—</h4>
+        </ng-template> -->
+
+
+
     </div>
 
   </body>

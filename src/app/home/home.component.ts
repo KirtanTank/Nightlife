@@ -69,24 +69,41 @@ export class HomeComponent implements OnInit {
         for(let z  = 0 ; z < this.array.length; z++){
           if(this.array[z].qid === 'movie'){
             this.movieArray.push(this.array[z]);
-            if(this.movieArray[z].i?.imageUrl){
-              console.log(this.movieArray[z].i?.imageUrl);
-            }
-            else{
-              
-            }
           }
         }
-        console.log(this.movieArray);
       }).catch((err : any) => {
         console.error(err);
       });  
     }, 3000);
     this.movieArray.splice(0, this.movieArray.length);
+    console.log(this.movieArray.length);
   }
   
   pop(){
+    console.log("start:"+this.movieArray.length);
     this.description = true;
+    for(let p = 0 ; p < this.movieArray.length ; p++){
+      if(this.movieArray[p].id === this.id){
+        this.name = this.movieArray[p].l;
+        this.year = this.movieArray[p].y;
+        this.actors = this.movieArray[p].s;
+        this.poster = this.movieArray[p].i?.imageUrl;
+        this.plot = this.movieArray[p]?.overview;
+      }
+    }
+    console.log("ok:"+this.movieArray.length);
+  }
+
+  id : any;
+  name : any;
+  year : any;
+  actors : any;
+  poster : any;
+  plot : any;
+
+  getId(movieId : any){
+    this.id = movieId
+    console.log(movieId);
   }
 
   displayPoster(posterpath : any){
