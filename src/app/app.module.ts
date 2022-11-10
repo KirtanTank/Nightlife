@@ -9,13 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { PopUpComponent } from './pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    PopUpComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +22,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     HttpClientModule,
     NgxPaginationModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

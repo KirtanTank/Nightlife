@@ -24,6 +24,7 @@
     "ngx-pagination": "^6.0.2",
     "ngx-spinner": "^14.0.0",
     "rxjs": "~7.5.0",
+    "smooth-scrollbar": "^8.8.1",
     "stream": "^0.0.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

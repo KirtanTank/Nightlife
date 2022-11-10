@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PopUpComponent } from '../pop-up/pop-up.component';
 import axios, { Axios } from 'axios';
 import { Stream } from 'stream';
-
 
 @Component({
   selector: 'app-home',
@@ -16,18 +14,14 @@ export class HomeComponent implements OnInit {
   page : any = 1
   perPage : any = 4
   array : any;
+  movieArray : any = [];
   // poster : any = "https://www.themoviedb.org/t/p/w220_and_h330_face";
 
-  comp = PopUpComponent;
   // internal = document.querySelector('internal')?.addEventListener('click', this.pop);
   description : boolean = false;
   show : boolean = false;
   loader : boolean = true;
 
-  pop(){
-    this.description = true;
-    this.comp = PopUpComponent;
-  }
   constructor() { }
 
   ngOnInit(): void {
@@ -58,7 +52,7 @@ export class HomeComponent implements OnInit {
     }, 3000);
     a?.addEventListener("transitioned", ()=>{
       document.body.removeChild(a);
-    })
+    });
 
     const options = {
       method: 'GET',
@@ -72,13 +66,28 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       axios.request(options).then((response : any) => {
         this.array = response.data.d;
-        console.log(this.array);
+        for(let z  = 0 ; z < this.array.length; z++){
+          if(this.array[z].qid === 'movie'){
+            this.movieArray.push(this.array[z]);
+            if(this.movieArray[z].i?.imageUrl){
+              console.log(this.movieArray[z].i?.imageUrl);
+            }
+            else{
+              
+            }
+          }
+        }
+        console.log(this.movieArray);
       }).catch((err : any) => {
         console.error(err);
       });  
     }, 3000);
+    this.movieArray.splice(0, this.movieArray.length);
   }
   
+  pop(){
+    this.description = true;
+  }
 
   displayPoster(posterpath : any){
       return posterpath;
