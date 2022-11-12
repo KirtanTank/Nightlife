@@ -29,55 +29,61 @@ export class HomeComponent implements OnInit {
 
   LoadMovie(searchTerm: any){
     searchTerm = this.search;
-    setTimeout(() => {
-      this.show = true;
-    }, 5000);
-    // const URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=266b4fd8`;
-    // const URL = `https://api.themoviedb.org/3/movie/popular?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&page=1`;
-    // axios.get(URL).then(response => {
-    //     this.array = response.data.results;
-      
-    // }).catch(err => {
-    //   console.log(err);
-    // });
+    if(this.search != ""){
+      setTimeout(() => {
+        this.show = true;
+      }, 5000);
+      // const URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=266b4fd8`;
+      // const URL = `https://api.themoviedb.org/3/movie/popular?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&page=1`;
+      // axios.get(URL).then(response => {
+      //     this.array = response.data.results;
+        
+      // }).catch(err => {
+      //   console.log(err);
+      // });
 
-    const a = document.querySelector('.load--hidden');
+      const a = document.querySelector('.load--hidden');
 
-    a?.classList.remove("load--hidden");
-    a?.classList.add("load");
+      a?.classList.remove("load--hidden");
+      a?.classList.add("load");
 
-    setTimeout(() => {
-      a?.classList.remove("load");
-      a?.classList.add("load--hidden");
-    }, 3000);
-    a?.addEventListener("transitioned", ()=>{
-      document.body.removeChild(a);
-    });
+      setTimeout(() => {
+        a?.classList.remove("load");
+        a?.classList.add("load--hidden");
+      }, 3000);
+      a?.addEventListener("transitioned", ()=>{
+        document.body.removeChild(a);
+      });
 
-    const options = {
-      method: 'GET',
-      url: 'https://imdb8.p.rapidapi.com/auto-complete',
-      params: {q: searchTerm},
-      headers: {
-        'X-RapidAPI-Key': 'aa1ab1bbb3msh5297edcd4ffe1c0p19ae55jsnfaef7c87634a',
-        'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-      }
-    };
-    setTimeout(() => {
-      axios.request(options).then((response : any) => {
-        this.array = response.data.d;
-        for(let z  = 0 ; z < this.array.length; z++){
-          if(this.array[z].qid === 'movie'){
-            this.movieArray.push(this.array[z]);
-          }
+      const options = {
+        method: 'GET',
+        url: 'https://imdb8.p.rapidapi.com/auto-complete',
+        params: {q: searchTerm},
+        headers: {
+          'X-RapidAPI-Key': 'aa1ab1bbb3msh5297edcd4ffe1c0p19ae55jsnfaef7c87634a',
+          'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
         }
-      }).catch((err : any) => {
-        console.error(err);
-      });  
-    }, 3000);
-    this.movieArray.splice(0, this.movieArray.length);
-    console.log(this.movieArray.length);
+      };
+      setTimeout(() => {
+        axios.request(options).then((response : any) => {
+          this.array = response.data.d;
+          for(let z  = 0 ; z < this.array.length; z++){
+            if(this.array[z].qid === 'movie'){
+              this.movieArray.push(this.array[z]);
+            }
+          }
+        }).catch((err : any) => {
+          console.error(err);
+        });  
+      }, 3000);
+      this.movieArray.splice(0, this.movieArray.length);
+      console.log(this.movieArray.length);
+    }
+    else{
+      alert("NO SEARCH");
+    }
   }
+
   
   pop(){
     console.log("start:"+this.movieArray.length);

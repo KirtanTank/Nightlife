@@ -4,37 +4,37 @@
   </head>
   <body>
     <div class="main">
+      <div class="upper">
+        <div class="title">
+          <img src="assets/logo-w.png" class="logo">
+          <p class="appTitle">Nightlife</p>
+        </div>
 
-      <div class="upper"></div>
+        <div class="middle">
+          <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
+          <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
+        </div>
 
-      <div class="title">
-        <p>Movie Catalogue</p>
-      </div>
-
-      <div class="middle">
-        <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search"/>
-        <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
-      </div>
-
-      <div class="search-container">
-        <div class="result">
-          <div class="load--hidden"></div>
-          <div class="internal" (click)="pop()" *ngFor="let x of movieArray">
-            <div class="poster" *ngIf="x.i?.imageUrl != undefined; else noPoster" (click)="getId(x.id)">
-              <img [src]="displayPoster(x.i.imageUrl)" class="movie">
+        <div class="search-container">
+          <div class="result">
+            <div class="load--hidden"></div>
+            <div class="internal" (click)="pop()" *ngFor="let x of movieArray">
+              <div class="poster" *ngIf="x.i?.imageUrl != undefined; else noPoster" (click)="getId(x.id)">
+                <img [src]="displayPoster(x.i.imageUrl)" class="movie">
+              </div>
+              <ng-template #noPoster (click)="getId(x.id)">
+                <img src="../../assets/no-poster1.jpg" class="movie">
+              </ng-template>
+              
+    
+              <div class="information">
+                  <h3 class="MovieTitle" *ngIf="x.l" (click)="getId(x.id)">{{x.l}}</h3>
+                  <h4 class="year" *ngIf="x.y; else noYear" (click)="getId(x.id)">{{x.y}}</h4>
+              </div>
+              <ng-template #noYear (click)="getId(x.id)">
+                <h4 class="year" (click)="getId(x.id)">—</h4>
+              </ng-template>
             </div>
-            <ng-template #noPoster (click)="getId(x.id)">
-              <img src="../../assets/no-poster1.jpg" class="movie">
-            </ng-template>
-            
-  
-            <div class="information">
-                <h3 class="MovieTitle" *ngIf="x.l" (click)="getId(x.id)">{{x.l}}</h3>
-                <h4 class="year" *ngIf="x.y; else noYear" (click)="getId(x.id)">{{x.y}}</h4>
-            </div>
-            <ng-template #noYear (click)="getId(x.id)">
-              <h4 class="year" (click)="getId(x.id)">—</h4>
-            </ng-template>
           </div>
         </div>
       </div>
