@@ -6,14 +6,14 @@
     <div class="main">
       <div class="upper">
         <div class="title">
-          <img src="assets/logo-w.png" class="logo">
+          <!-- <img src="assets/logo-w.png" class="logo" onmouseover="highlight()"> -->
           <p class="appTitle">Nightlife</p>
         </div>
 
-        <div class="middle">
-          <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
-          <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
-        </div>
+          <div class="middle">
+            <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
+            <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
+          </div>
 
         <div class="search-container">
           <div class="result">

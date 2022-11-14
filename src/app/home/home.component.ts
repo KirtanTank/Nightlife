@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
 
   LoadMovie(searchTerm: any){
     searchTerm = this.search;
+    this.description = false;
     if(this.search != ""){
       setTimeout(() => {
         this.show = true;
@@ -50,7 +51,7 @@ export class HomeComponent implements OnInit {
       setTimeout(() => {
         a?.classList.remove("load");
         a?.classList.add("load--hidden");
-      }, 3000);
+      }, 5000);
       a?.addEventListener("transitioned", ()=>{
         document.body.removeChild(a);
       });
