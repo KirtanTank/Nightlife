@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import axios, { Axios } from 'axios';
-import { Stream } from 'stream';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +12,25 @@ export class HomeComponent implements OnInit {
   searchcon : any = document.querySelector('.search-container');
   page : any = 1
   perPage : any = 4
-  array : any;
-  movieArray : any = [];
-  // poster : any = "https://www.themoviedb.org/t/p/w220_and_h330_face";
+  firstArray : any;
+  //tmdb poster
+  tmdb_poster : any = "https://image.tmdb.org/t/p/w500/";
 
-  // internal = document.querySelector('internal')?.addEventListener('click', this.pop);
+  //TMDB API
+  tmdb_obj : any;
+  tmbdArray : any = [];
+  tmdb_movie_array : any = [];
+
+  id : any;
+  year : any;
+  name : any;
+  poster : any;
+  overview : any;
+  rate : any;
+  language: any;
+  popularity : any;
+  type : any;
+
   description : boolean = false;
   show : boolean = false;
   loader : boolean = true;
@@ -34,51 +47,42 @@ export class HomeComponent implements OnInit {
       setTimeout(() => {
         this.show = true;
       }, 5000);
-      // const URL = `http://www.omdbapi.com/?s=${searchTerm}&apikey=266b4fd8`;
-      // const URL = `https://api.themoviedb.org/3/movie/popular?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&page=1`;
-      // axios.get(URL).then(response => {
-      //     this.array = response.data.results;
-        
-      // }).catch(err => {
-      //   console.log(err);
-      // });
 
+      const multiURL = `https://api.themoviedb.org/3/search/multi?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&query=${searchTerm}&page=1&include_adult=false`
+
+
+      // Loading Animation
       const a = document.querySelector('.load--hidden');
-
       a?.classList.remove("load--hidden");
       a?.classList.add("load");
 
       setTimeout(() => {
         a?.classList.remove("load");
         a?.classList.add("load--hidden");
-      }, 5000);
+      }, 4000);
       a?.addEventListener("transitioned", ()=>{
         document.body.removeChild(a);
       });
 
-      const options = {
-        method: 'GET',
-        url: 'https://imdb8.p.rapidapi.com/auto-complete',
-        params: {q: searchTerm},
-        headers: {
-          'X-RapidAPI-Key': 'aa1ab1bbb3msh5297edcd4ffe1c0p19ae55jsnfaef7c87634a',
-          'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-        }
-      };
       setTimeout(() => {
-        axios.request(options).then((response : any) => {
-          this.array = response.data.d;
-          for(let z  = 0 ; z < this.array.length; z++){
-            if(this.array[z].qid === 'movie'){
-              this.movieArray.push(this.array[z]);
+        // The tmdb api call
+        axios.get(multiURL).then(response => {
+          // tmdb
+          this.tmdb_obj = response;
+          this.tmbdArray = response.data.results;
+
+          for(let m = 0 ; m < this.tmbdArray.length ; m++){
+            if(this.tmbdArray[m].media_type === 'movie'){
+              this.tmdb_movie_array.push(this.tmbdArray[m]);
             }
           }
-        }).catch((err : any) => {
-          console.error(err);
-        });  
+          console.log(this.tmdb_movie_array);
+        }).catch(err => {
+          console.log(err);
+        });
       }, 3000);
-      this.movieArray.splice(0, this.movieArray.length);
-      console.log(this.movieArray.length);
+      this.tmdb_movie_array.splice(0, this.tmdb_movie_array.length);
+      console.log(this.tmdb_movie_array.length);
     }
     else{
       alert("NO SEARCH");
@@ -87,26 +91,24 @@ export class HomeComponent implements OnInit {
 
   
   pop(){
-    console.log("start:"+this.movieArray.length);
+    console.log("start:"+this.tmdb_movie_array.length);
     this.description = true;
-    for(let p = 0 ; p < this.movieArray.length ; p++){
-      if(this.movieArray[p].id === this.id){
-        this.name = this.movieArray[p].l;
-        this.year = this.movieArray[p].y;
-        this.actors = this.movieArray[p].s;
-        this.poster = this.movieArray[p].i?.imageUrl;
-        this.plot = this.movieArray[p]?.overview;
+    for(let p = 0 ; p < this.tmdb_movie_array.length ; p++){
+      if(this.tmdb_movie_array[p].id === this.id){
+        this.name = this.tmdb_movie_array[p].title;
+        this.year = this.tmdb_movie_array[p].release_date;
+        this.poster = `https://image.tmdb.org/t/p/w500/${this.tmdb_movie_array[p].poster_path}`;
+        this.overview = this.tmdb_movie_array[p]?.overview;
+        this.rate = this.tmdb_movie_array[p].vote_average;
+        this.language = this.tmdb_movie_array[p].original_language;
+        this.popularity = this.tmdb_movie_array[p].popularity;
+        this.type = this.tmdb_movie_array[p].media_type;
+
+
       }
     }
-    console.log("ok:"+this.movieArray.length);
+    console.log("ok:"+this.tmdb_movie_array.length);
   }
-
-  id : any;
-  name : any;
-  year : any;
-  actors : any;
-  poster : any;
-  plot : any;
 
   getId(movieId : any){
     this.id = movieId
@@ -114,51 +116,7 @@ export class HomeComponent implements OnInit {
   }
 
   displayPoster(posterpath : any){
-      return posterpath;
+      return `https://image.tmdb.org/t/p/w500/${posterpath}`;
   }
-
-  // displayMovie(movies : any){
-  //   for(let idx = 0 ; idx < movies.length ; idx++){
-
-  //     if(movies[idx].Poster !== "N/A"){
-  //       var mo = movies[idx].Poster;
-  //     }
-  //     else{
-  //       mo = "poster.jpg";
-  //     }
-  //   }
-  //   this.MovieDetails(event?.target);
-  // }
-
-  // async MovieDetails(movie : any){
-  //   const result = await fetch(`https://www.omdbapi.com/?i=${movie.dataset.id}&apikey=266b4fd8`);
-  //   const movieDetails = await result.json();
-  //   console.log(movieDetails); 
-  //   this.info(movieDetails);
-  // }
-
-  // info(movie : any){
-  //   movie.innerHTML = `
-  //     <div class="result">
-
-  //     <div class="poster">
-  //       <img src="${(movie.Poster !== "N/A") ? movie.Poster : 'poster.jpg'}" class="movie">
-  //     </div>
-
-  //     <div class="information">
-  //         <h3 class="MovieTitle"><b>Title:</b>${movie.Title}</h3>
-  //         <p class="year"><b>Year:</b>${movie.Year}</p>
-  //         <p class="rate"><b>Ratings:</b>${movie.Rated}</p>
-  //         <p class="release"><b>Released:</b> ${movie.Released}</p>
-  //         <p class="genre"><b>Genre:</b> ${movie.Genre}</p>
-  //         <p class="writer"><b>Writer:</b> ${movie.Writer}</p>
-  //         <p class="actors"><b>Actors: </b> ${movie.Actors}</p>
-  //         <p class="plot"><b>Plot:</b> ${movie.Plot}</p>
-  //         <p class="languages"><b>Languages:</b> ${movie.Language}</p>
-  //         <p class="awards"><b>Awards:</b> ${movie.Awards}</p>
-  //     </div>
-  //   </div>`;
-  // }
-
 
 }
