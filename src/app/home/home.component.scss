@@ -159,7 +159,7 @@ html, body{
 .info{
     display: flex;
     flex-direction: row;
-    background-color: rgb(48, 47, 47);
+    background-color: rgb(48, 48, 48);
     padding: 20px;
 }
 
@@ -167,6 +167,7 @@ html, body{
     padding: 20px;
     background-color: rgb(85, 85, 85);
     border-radius: 20px;
+    height: fit-content;
 }
 
 .moviePoster{
@@ -189,14 +190,13 @@ html, body{
     color: rgb(255, 191, 0);
     padding: 10px;
 }
-.dob, .rate, .release, .genre, .writer, .actors, .languages, .awards{
+.dob, .rate, .release, .genre, .languages, .awards{
     padding: 10px;
 }
 
 .plot{
     padding: 10px;
     justify-content: space-evenly;
-    max-width: 600px;
 }
 
 .noMovie{
