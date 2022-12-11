@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       setTimeout(() => {
         a?.classList.remove("load");
         a?.classList.add("load--hidden");
-      }, 4000);
+      }, 3000);
       a?.addEventListener("transitioned", ()=>{
         document.body.removeChild(a);
       });
@@ -77,6 +77,14 @@ export class HomeComponent implements OnInit {
               this.tmdb_movie_array.push(this.tmbdArray[m]);
             }
           }
+          // No movie
+          const newClass = document.querySelector(".noMovie");
+          if(this.tmdb_movie_array.length == 0){
+            newClass?.classList.add("noMovie--show");
+          }
+          else{
+            newClass?.classList.remove("noMovie--show");
+          }
           console.log(this.tmdb_movie_array);
         }).catch(err => {
           console.log(err);
@@ -84,7 +92,7 @@ export class HomeComponent implements OnInit {
       }, 3000);
       this.tmdb_movie_array.splice(0, this.tmdb_movie_array.length);
       console.log(this.tmdb_movie_array.length);
-    }
+    }    
     else{
       alert("NO SEARCH");
     }

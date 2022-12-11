@@ -36,6 +36,7 @@ html,body{
     width: 100%;
     margin-top: 30px;
     text-align: center;
+    position: relative;
 }
 
 .search{
@@ -179,4 +180,20 @@ html,body{
     padding: 10px;
     justify-content: space-evenly;
     max-width: 600px;
+}
+
+.noMovie{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    left: 30%;
+    visibility: hidden;
+}
+
+.noMovie--show{
+    opacity: 1;
+    visibility: visible;
 }

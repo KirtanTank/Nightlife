@@ -36,26 +36,31 @@
             </div>
           </div>
         </div>
+
+        <div class="noMovie">
+          <h1>No Movie Found</h1>
+        </div>
+
       </div>
     </div>
 
 <!-- Information Show -->
     <div class="info" *ngIf="description">
       <div class="mainPoster">
-          <img src="{{poster}}" class="mainPoster" *ngIf="path != null ; else noPoster">
+          <img src="{{poster}}" class="moviePoster" *ngIf="path != null ; else noPoster">
       </div>
       <ng-template #noPoster>
         <img src="/assets/no-poster1.jpg" class="moviePoster">
       </ng-template>
 
       <div class="description">
-          <h3 class="name" *ngIf="name != null; else noName"><b>{{name}}</b></h3>
-          <p class="awards" *ngIf="type != null; else noType"><b>Type:</b>&nbsp;{{type}}</p>
-          <p class="dob" *ngIf="year != null; else noDOB"><b>Release Date:</b>&nbsp;{{year}}</p>
-          <p class="plot" *ngIf="overview != null; else noPlot"><b>Overview:</b>&nbsp;{{overview}}</p>
-          <p class="rate" *ngIf="rate != null; else noRate"><b>Ratings:</b>&nbsp;{{rate}}</p>
-          <p class="genre" *ngIf="popularity != null; else noPopularity"><b>Popularity:</b>&nbsp;{{popularity}}</p>
-          <p class="languages" *ngIf="language != null; else noLanguages"><b>Original Language:</b>&nbsp;{{language}}</p>
+          <h3 class="name" *ngIf="name != ''; else noName"><b>{{name}}</b></h3>
+          <p class="awards" *ngIf="type != ''; else noType"><b>Type:</b>&nbsp;{{type}}</p>
+          <p class="dob" *ngIf="year != ''; else noDOB"><b>Release Date:</b>&nbsp;{{year}}</p>
+          <p class="plot" *ngIf="overview != ''; else noPlot"><b>Overview:</b>&nbsp;{{overview}}</p>
+          <p class="rate" *ngIf="rate != ''; else noRate"><b>Ratings:</b>&nbsp;{{rate}}</p>
+          <p class="genre" *ngIf="popularity != ''; else noPopularity"><b>Popularity:</b>&nbsp;{{popularity}}</p>
+          <p class="languages" *ngIf="language != ''; else noLanguages"><b>Original Language:</b>&nbsp;{{language}}</p>
       </div>
       <ng-template #noName>
         <h4 class="name"><b>Title:</b>&nbsp;—</h4>
