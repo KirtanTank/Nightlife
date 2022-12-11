@@ -18,11 +18,11 @@
           <div class="result">
             <div class="load--hidden"></div>
             <div class="internal" (click)="pop()" *ngFor="let x of tmdb_movie_array">
-              <div class="poster" *ngIf="x.poster_path != undefined; else noPoster" (click)="getId(x.id)">
-                <img [src]="displayPoster(x.poster_path)" class="movie">
+              <div class="poster">
+                <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)">
               </div>
-              <ng-template #noPoster (click)="getId(x.id)">
-                <img src="../../assets/no-poster1.jpg" class="movie">
+              <ng-template #noPoster>
+                <img src="/assets/no-poster1.jpg" class="movie" (click)="getId(x.id)">
               </ng-template>
               
     
@@ -42,20 +42,20 @@
 <!-- Information Show -->
     <div class="info" *ngIf="description">
       <div class="mainPoster">
-          <img src="{{poster}}" class="moviePoster" *ngIf="poster ; else noPoster">
+          <img src="{{poster}}" class="mainPoster" *ngIf="path != null ; else noPoster">
       </div>
       <ng-template #noPoster>
         <img src="/assets/no-poster1.jpg" class="moviePoster">
       </ng-template>
 
       <div class="description">
-          <h3 class="name" *ngIf="name != undefined; else noName"><b>{{name}}</b></h3>
-          <p class="awards" *ngIf="type != undefined; else noType"><b>Type:</b>&nbsp;{{type}}</p>
-          <p class="dob" *ngIf="year != undefined; else noDOB"><b>Release Date:</b>&nbsp;{{year}}</p>
-          <p class="plot" *ngIf="overview != undefined; else noPlot"><b>Overview:</b>&nbsp;{{overview}}</p>
-          <p class="rate" *ngIf="rate != undefined; else noRate"><b>Ratings:</b>&nbsp;{{rate}}</p>
-          <p class="genre" *ngIf="popularity != undefined; else noPopularity"><b>Popularity:</b>&nbsp;{{popularity}}</p>
-          <p class="languages" *ngIf="language != undefined; else noLanguages"><b>Original Language:</b>&nbsp;{{language}}</p>
+          <h3 class="name" *ngIf="name != null; else noName"><b>{{name}}</b></h3>
+          <p class="awards" *ngIf="type != null; else noType"><b>Type:</b>&nbsp;{{type}}</p>
+          <p class="dob" *ngIf="year != null; else noDOB"><b>Release Date:</b>&nbsp;{{year}}</p>
+          <p class="plot" *ngIf="overview != null; else noPlot"><b>Overview:</b>&nbsp;{{overview}}</p>
+          <p class="rate" *ngIf="rate != null; else noRate"><b>Ratings:</b>&nbsp;{{rate}}</p>
+          <p class="genre" *ngIf="popularity != null; else noPopularity"><b>Popularity:</b>&nbsp;{{popularity}}</p>
+          <p class="languages" *ngIf="language != null; else noLanguages"><b>Original Language:</b>&nbsp;{{language}}</p>
       </div>
       <ng-template #noName>
         <h4 class="name"><b>Title:</b>&nbsp;—</h4>

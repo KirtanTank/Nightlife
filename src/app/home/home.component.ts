@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   language: any;
   popularity : any;
   type : any;
+  path : any;
 
   description : boolean = false;
   show : boolean = false;
@@ -91,23 +92,20 @@ export class HomeComponent implements OnInit {
 
   
   pop(){
-    console.log("start:"+this.tmdb_movie_array.length);
     this.description = true;
     for(let p = 0 ; p < this.tmdb_movie_array.length ; p++){
       if(this.tmdb_movie_array[p].id === this.id){
         this.name = this.tmdb_movie_array[p].title;
         this.year = this.tmdb_movie_array[p].release_date;
         this.poster = `https://image.tmdb.org/t/p/w500/${this.tmdb_movie_array[p].poster_path}`;
+        this.path = this.tmdb_movie_array[p].poster_path;
         this.overview = this.tmdb_movie_array[p]?.overview;
         this.rate = this.tmdb_movie_array[p].vote_average;
         this.language = this.tmdb_movie_array[p].original_language;
         this.popularity = this.tmdb_movie_array[p].popularity;
         this.type = this.tmdb_movie_array[p].media_type;
-
-
       }
     }
-    console.log("ok:"+this.tmdb_movie_array.length);
   }
 
   getId(movieId : any){
