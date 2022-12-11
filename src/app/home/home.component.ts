@@ -118,8 +118,7 @@ export class HomeComponent implements OnInit {
   }
 
   getId(movieId : any){
-    this.id = movieId
-    console.log(movieId);
+    this.id = movieId;
   }
 
   displayPoster(posterpath : any){

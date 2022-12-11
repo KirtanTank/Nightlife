@@ -9,43 +9,42 @@
           <p class="appTitle">Nightlife</p>
         </div>
 
-          <div class="middle">
+        <div class="middle">
             <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
             <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
-          </div>
+        </div>
 
         <div class="search-container">
           <div class="result">
             <div class="load--hidden"></div>
             <div class="internal" (click)="pop()" *ngFor="let x of tmdb_movie_array">
               <div class="poster">
-                <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)">
+                <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)" id="movie">
               </div>
               <ng-template #noPoster>
-                <img src="/assets/no-poster1.jpg" class="movie" (click)="getId(x.id)">
+                <img src="/assets/no-poster1.jpg" class="movie" (click)="getId(x.id)" id="movie">
               </ng-template>
               
-    
               <div class="information">
-                  <h3 class="MovieTitle" *ngIf="x.title" (click)="getId(x.id)">{{x.title}}</h3>
-                  <h4 class="year" *ngIf="x.release_date; else noYear" (click)="getId(x.id)">{{x.release_date}}</h4>
+                <h3 class="MovieTitle" *ngIf="x.title" (click)="getId(x.id)" id="MovieTitle">{{x.title}}</h3>
+                <h4 class="year" *ngIf="x.release_date; else noYear" (click)="getId(x.id)" id="year">{{x.release_date}}</h4>
               </div>
               <ng-template #noYear (click)="getId(x.id)">
-                <h4 class="year" (click)="getId(x.id)">—</h4>
+                <h4 class="year" id="year" (click)="getId(x.id)">—</h4>
               </ng-template>
             </div>
+            
           </div>
         </div>
 
         <div class="noMovie">
           <h1>No Movie Found</h1>
         </div>
-
       </div>
     </div>
 
-<!-- Information Show -->
-    <div class="info" *ngIf="description">
+    <!-- Information Show -->
+    <div class="info" *ngIf="description" id="info">
       <div class="mainPoster">
           <img src="{{poster}}" class="moviePoster" *ngIf="path != null ; else noPoster">
       </div>
@@ -86,8 +85,7 @@
       <ng-template #noType>
         <h4 class="awards"><b>Type:</b>&nbsp;—</h4>
       </ng-template>
-    </div>
-
+    </div>    
   </body>
 </html>
 
