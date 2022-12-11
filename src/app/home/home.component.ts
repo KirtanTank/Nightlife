@@ -79,12 +79,14 @@ export class HomeComponent implements OnInit {
           }
           // No movie
           const newClass = document.querySelector(".noMovie");
-          if(this.tmdb_movie_array.length == 0){
-            newClass?.classList.add("noMovie--show");
-          }
-          else{
-            newClass?.classList.remove("noMovie--show");
-          }
+            if(this.tmdb_movie_array.length == 0){
+              setTimeout(() => {
+                newClass?.classList.add("noMovie--show");
+              }, 500);
+            }
+            else{
+              newClass?.classList.remove("noMovie--show");
+            }  
           console.log(this.tmdb_movie_array);
         }).catch(err => {
           console.log(err);
@@ -97,7 +99,6 @@ export class HomeComponent implements OnInit {
       alert("NO SEARCH");
     }
   }
-
   
   pop(){
     this.description = true;
