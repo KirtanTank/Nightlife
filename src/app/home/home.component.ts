@@ -96,6 +96,7 @@ export class HomeComponent implements OnInit {
       console.log(this.tmdb_movie_array.length);
     }    
     else{
+      // No Serach Alert Notification
       alert("NO SEARCH");
     }
   }
