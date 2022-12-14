@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios, { Axios } from 'axios';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
   show : boolean = false;
   loader : boolean = true;
 
-  constructor() { }
+  constructor(private toastr : ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -97,8 +98,13 @@ export class HomeComponent implements OnInit {
     }    
     else{
       // No Serach Alert Notification
-      alert("NO SEARCH");
+      // alert("NO SEARCH");
+      this.alert();
     }
+  }
+
+  alert(){
+    this.toastr.warning('Please Search Something!!');
   }
   
   pop(){
