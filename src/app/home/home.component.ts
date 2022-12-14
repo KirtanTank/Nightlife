@@ -98,13 +98,15 @@ export class HomeComponent implements OnInit {
     }    
     else{
       // No Serach Alert Notification
-      // alert("NO SEARCH");
-      this.alert();
+      alert("NO SEARCH!!");
+      // this.toastr.warning('Please Search Something!!', 'Alert', {
+      //   timeOut: 2000,
+      //   progressBar: true,
+      //   progressAnimation: 'decreasing',
+      //   positionClass: 'toast-top-right',
+      //   closeButton: true,
+      // });
     }
-  }
-
-  alert(){
-    this.toastr.warning('Please Search Something!!');
   }
   
   pop(){
