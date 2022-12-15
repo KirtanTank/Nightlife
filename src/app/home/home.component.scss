@@ -216,3 +216,94 @@ html, body{
     opacity: 1;
     visibility: visible;
 }
+
+.parent{
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+
+.notification{
+    position: absolute;
+    background-color: rgb(255, 191, 0);
+    width: fit-content;
+    padding: 5px;
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    flex-direction: row;
+    border: none;
+    border-radius: 50px;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.notification--show{
+    animation: 1s ease slide-left;
+    visibility: visible;
+    overflow: hidden;
+}
+@keyframes slide-left {
+  from {
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  to {
+    opacity: 1;
+    transition: all 0.5s;
+    overflow: hidden;
+  }
+}
+
+.cross{
+    border: 3px solid black;
+    padding: 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}
+
+.x{
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+}
+
+.txt{
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    color: black;
+    font-family: 'Fredoka One', cursive;
+}
+
+.search-container{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+.scroll-left, .scroll-right{
+    position: absolute;
+    text-align: center;
+
+}
+
+.left, .right{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-radius: 2px solid black;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 40px black;
+    background-color: white;
+    font-size: 20px;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.right{
+    justify-content: flex-end;
+}

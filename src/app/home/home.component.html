@@ -5,6 +5,18 @@
   <body>
     <div class="main">
       <div class="upper">
+
+        <div class="parent">
+          <div class="notification">
+            <div class="cross">
+              <p class="x">!</p>
+            </div>
+            <div class="text">
+              <p class="txt">Please Search Something!</p>
+            </div>
+          </div>
+        </div>
+
         <div class="title">
           <p class="appTitle">Nightlife</p>
         </div>
@@ -15,6 +27,9 @@
         </div>
 
         <div class="search-container">
+          <!-- <div class="scroll-left">
+            <button class="left"><</button>
+          </div> -->
           <div class="result">
             <div class="load--hidden"></div>
             <div class="internal" (click)="pop()" *ngFor="let x of tmdb_movie_array">
@@ -32,9 +47,11 @@
               <ng-template #noYear (click)="getId(x.id)">
                 <h4 class="year" id="year" (click)="getId(x.id)">—</h4>
               </ng-template>
-            </div>
-            
+            </div>  
           </div>
+          <!-- <div class="scroll-right">
+            <button class="right">></button>
+          </div> -->
         </div>
 
         <div class="noMovie">

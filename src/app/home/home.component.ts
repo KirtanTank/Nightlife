@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import axios, { Axios } from 'axios';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -37,7 +36,7 @@ export class HomeComponent implements OnInit {
   show : boolean = false;
   loader : boolean = true;
 
-  constructor(private toastr : ToastrService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -95,19 +94,23 @@ export class HomeComponent implements OnInit {
       }, 3000);
       this.tmdb_movie_array.splice(0, this.tmdb_movie_array.length);
       console.log(this.tmdb_movie_array.length);
-    }    
-    else{
-      // No Serach Alert Notification
-      alert("NO SEARCH!!");
-      // this.toastr.warning('Please Search Something!!', 'Alert', {
-      //   timeOut: 2000,
-      //   progressBar: true,
-      //   progressAnimation: 'decreasing',
-      //   positionClass: 'toast-top-right',
-      //   closeButton: true,
-      // });
     }
+    else{
+      const notify = document.querySelector(".notification");
+      notify?.classList.add("notification--show");
+      setTimeout(() => {
+        notify?.classList.remove("notification--show");
+      }, 3000);
+    }
+
   }
+
+  // enter = document.querySelector("search")?.addEventListener("keydown", (e) => {
+  //   let keyboardEvent = <KeyboardEvent> e;
+  //   if(keyboardEvent.key === 'Enter'){
+  //     this.LoadMovie(this.search);
+  //   }
+  // });
   
   pop(){
     this.description = true;

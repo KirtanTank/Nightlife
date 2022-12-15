@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
-// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CommonModule,
-    // ToastrModule.forRoot({preventDuplicates: true, enableHtml: true})
+    CommonModule  
   ],
   providers: [],
   bootstrap: [AppComponent],
