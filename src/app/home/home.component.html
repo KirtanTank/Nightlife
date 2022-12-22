@@ -22,14 +22,19 @@
         </div>
 
         <div class="middle">
-            <input type="search" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
+            <input type="text" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
             <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
         </div>
 
         <div class="search-container">
-          <!-- <div class="scroll-left">
-            <button class="left"><</button>
-          </div> -->
+          <div class="genre-choose">
+              <input type="radio" value="Movies" class="values"/>
+              <label>Movies</label>
+              <input type="radio" value="Tv Series" class="values"/>
+              <label>Tv Series</label>
+              <input type="radio" value="All" class="values"/>
+              <label>All</label>
+          </div>
           <div class="result">
             <div class="load--hidden"></div>
             <div class="internal" (click)="pop()" *ngFor="let x of tmdb_movie_array">
@@ -49,9 +54,6 @@
               </ng-template>
             </div>  
           </div>
-          <!-- <div class="scroll-right">
-            <button class="right">></button>
-          </div> -->
         </div>
 
         <div class="noMovie">

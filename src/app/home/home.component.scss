@@ -6,16 +6,31 @@
     padding-top: 0;
 }
 
-html, body{
+html{
     height: 100%;
     scroll-behavior: smooth !important;
 }
 
-.upper{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(/assets/background.png);
-    height: 100vh;
+body{
+    scroll-behavior: smooth !important;
+    // background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(/assets/background.png);
+    // background-size: cover;
+    // background-position: center;
     width: 100%;
+}
+
+.main{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(/assets/background.png);
     background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+.upper{
+    // height: 100%;
+    // width: 100%;
+    // background-size: cover;
+    // background-position: center;
     position: relative;
 }
 
@@ -61,6 +76,25 @@ html, body{
     cursor: pointer;
 }
 
+.shaking{
+    animation: shake 0.2s;
+}
+
+@keyframes shake{
+    100%{
+        transform: translate(0);
+        transition: 0.5s;
+    }
+    50%{
+        transform: translate(-1%);
+        transition: 0.5s;
+    }
+    0%{
+        transform: translate(1%);
+        transition: 0.5s;
+    }
+}
+
 .button{
     width: 120px;
     height: 50px;
@@ -78,12 +112,23 @@ html, body{
     }
 }
 
+.search-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.genre-choose{
+    background-color: aquamarine;
+    width: 100%;
+    height: fit-content;
+}
 .result{
+    padding-top: 100px;
     color: black;
     font-size: 20px;
     display: flex;
     flex-direction: row;
-    padding: 10px;
     overflow-x: scroll;
 }
 
@@ -280,11 +325,6 @@ html, body{
     font-family: 'Fredoka One', cursive;
 }
 
-.search-container{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-}
 .scroll-left, .scroll-right{
     position: absolute;
     text-align: center;

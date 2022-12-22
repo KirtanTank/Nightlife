@@ -97,9 +97,12 @@ export class HomeComponent implements OnInit {
     }
     else{
       const notify = document.querySelector(".notification");
+      const searchbar = document.querySelector(".search"); 
       notify?.classList.add("notification--show");
+      searchbar?.classList.add("shaking")
       setTimeout(() => {
         notify?.classList.remove("notification--show");
+        searchbar?.classList.remove("shaking");
       }, 3000);
     }
 
