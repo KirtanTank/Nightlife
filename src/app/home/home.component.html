@@ -23,21 +23,21 @@
 
         <div class="middle">
             <input type="text" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
-            <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
+            <button type="button" (click)="LoadMovie($event);radioValue()" class="button">Search</button>
         </div>
 
         <div class="search-container">
           <div class="genre-choose">
-              <input type="radio" value="Movies" class="values"/>
-              <label>Movies</label>
-              <input type="radio" value="Tv Series" class="values"/>
-              <label>Tv Series</label>
-              <input type="radio" value="All" class="values"/>
-              <label>All</label>
+              <input type="radio" class="radio_input" id="radio_input1" value="Movies" name="values" (change)="radioValue()"/>
+              <label for="radio_input1" class="radio_label">Movies</label>
+              <input type="radio" class="radio_input" id="radio_input2" value="TvSeries" name="values" (change)="radioValue()"/>
+              <label for="radio_input2" class="radio_label">Tv Series</label>
+              <input type="radio" class="radio_input" id="radio_input3" value="All" name="values" (change)="radioValue()" checked/>
+              <label for="radio_input3" class="radio_label">All</label>
           </div>
           <div class="result">
             <div class="load--hidden"></div>
-            <div class="internal" (click)="pop()" *ngFor="let x of tmdb_movie_array">
+            <div class="internal" (click)="pop()" *ngFor="let x of show_array;let index= index">
               <div class="poster">
                 <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)" id="movie">
               </div>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="noMovie">
-          <h1>No Movie Found</h1>
+          <h1>Nothing Found</h1>
         </div>
       </div>
     </div>

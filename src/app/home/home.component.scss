@@ -117,12 +117,40 @@ body{
     display: flex;
     flex-direction: column;
     height: 100vh;
+    
 }
 .genre-choose{
-    background-color: aquamarine;
-    width: 100%;
     height: fit-content;
+    width: fit-content;
+    overflow: hidden;
+    cursor: pointer;
+    background: transparent;
+    display: flex;
+    justify-content: flex-end;
 }
+
+.radio_input{
+    display: none;
+}
+
+.radio_label{
+    width: 75px;
+    background-color: #143d59;
+    color: white;
+    border:2px solid rgb(11, 11, 10);
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+}
+
+.radio_input:checked+.radio_label{
+    background-color: #ffe565;
+    color: black;
+}
+
 .result{
     padding-top: 100px;
     color: black;
