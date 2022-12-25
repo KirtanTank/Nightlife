@@ -19,12 +19,13 @@ export class HomeComponent implements OnInit {
 
   //tmdb API
   tmdb_obj : any;
+  crew_obj : any;
   tmbdArray : any = [];
   tmdb_movie_array : any = [];
   tmdb_tv_array : any = []
   tmdb_scrap_array : any = [];
   tmdb_new_array : any = []
-  show_array : any;
+  show_array : any = this.tmdb_new_array;
 
   id : any;
   year : any;
@@ -40,26 +41,37 @@ export class HomeComponent implements OnInit {
   description : boolean = false;
   show : boolean = false;
   loader : boolean = true;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  movie_info : boolean = false;
+  tv_info : boolean = false;
+  all_info : boolean = false;
 
   radioValue(){
     const movies = <HTMLInputElement> document.getElementById('radio_input1');
     const tv = <HTMLInputElement> document.getElementById('radio_input2');
     const all = <HTMLInputElement> document.getElementById('radio_input3');
     if(all.checked){
+      this.all_info = true;
+      this.movie_info = false;
+      this.tv_info = false;
       this.show_array = this.tmdb_new_array;
+      console.log(this.show_array);
     }
     else if(tv.checked){
+      this.tv_info = true;
+      this.movie_info = false;
+      this.all_info = false;
       this.show_array = this.tmdb_tv_array;
+      console.log(this.show_array);
     }
     else if(movies.checked){
+      this.movie_info = true;
+      this.tv_info = false;
+      this.all_info = false;
       this.show_array = this.tmdb_movie_array;
+      console.log(this.show_array);
     }
   }
+
 
   LoadMovie(searchTerm: any){
     searchTerm = this.search;
@@ -68,10 +80,12 @@ export class HomeComponent implements OnInit {
       setTimeout(() => {
         this.show = true;
       }, 5000);
+      // Check the radio value
+      this.radioValue();  
+      // Load Animation
+      this.loadAnimation();
 
       const multiURL = `https://api.themoviedb.org/3/search/multi?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&query=${searchTerm}&page=1&include_adult=false`
-
-      this.loadAnimation();
 
       setTimeout(() => {
         // The tmdb api call
@@ -93,8 +107,9 @@ export class HomeComponent implements OnInit {
           // Combining Two Arrays
           this.tmdb_new_array = this.tmdb_movie_array.concat(this.tmdb_tv_array);
           // No movie
+          console.log(this.all_info, this.movie_info, this.tv_info);
           const newClass = document.querySelector(".noMovie");
-          if(this.tmdb_new_array.length == 0){
+          if(this.tmdb_tv_array.length == 0){
             setTimeout(() => {
               newClass?.classList.add("noMovie--show");
             }, 500);
@@ -102,8 +117,9 @@ export class HomeComponent implements OnInit {
           else{
             newClass?.classList.remove("noMovie--show");
           }
+          this.show_array = this.tmdb_new_array;
           // console.log(this.tmbdArray);  
-          // console.log(this.tmdb_new_array);
+          console.log(this.tmdb_new_array);
           // console.log(this.tmdb_movie_array);
           // console.log(this.tmdb_tv_array);
           // console.log(this.tmdb_scrap_array);
@@ -114,7 +130,7 @@ export class HomeComponent implements OnInit {
       this.tmdb_new_array.splice(0, this.tmdb_new_array.length);
       this.tmdb_movie_array.splice(0, this.tmdb_movie_array.length);
       this.tmdb_tv_array.splice(0, this.tmdb_tv_array.length);
-      console.log(this.tmdb_movie_array.length);
+      this.tmdb_scrap_array.splice(0, this.tmdb_scrap_array.length);
     }
     else{
       this.noSearch();
@@ -166,10 +182,21 @@ export class HomeComponent implements OnInit {
 
   getId(movieId : any){
     this.id = movieId;
+    const crew = `https://api.themoviedb.org/3/movie/${this.id}/credits?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US`;
+
+    axios.get(crew).then(response => {
+      this.crew_obj = response;
+      console.log(this.crew_obj);
+    }).catch(err => {console.log(err)});
   }
 
   displayPoster(posterpath : any){
       return `https://image.tmdb.org/t/p/w500/${posterpath}`;
   }
 
+  constructor() { 
+  }
+
+  ngOnInit(): void {
+  }
 }

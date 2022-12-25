@@ -6,6 +6,7 @@
     <div class="main">
       <div class="upper">
 
+        <!-- No Search Container -->
         <div class="parent">
           <div class="notification">
             <div class="cross">
@@ -17,16 +18,19 @@
           </div>
         </div>
 
+        <!-- The Title container -->
         <div class="title">
           <p class="appTitle">Nightlife</p>
         </div>
 
+        <!-- The Search bar and Button container -->
         <div class="middle">
-            <input type="text" class="search" placeholder="Search Your Favorite Movie" [(ngModel)]="search" />
-            <button type="button" (click)="LoadMovie($event);radioValue()" class="button">Search</button>
+            <input type="search" class="search" placeholder="Search Your Show..." [(ngModel)]="search" />
+            <button type="button" (click)="LoadMovie($event)" class="button">Search</button>
         </div>
 
         <div class="search-container">
+          <!-- Choosing the genre by radio button -->
           <div class="genre-choose">
               <input type="radio" class="radio_input" id="radio_input1" value="Movies" name="values" (change)="radioValue()"/>
               <label for="radio_input1" class="radio_label">Movies</label>
@@ -35,9 +39,10 @@
               <input type="radio" class="radio_input" id="radio_input3" value="All" name="values" (change)="radioValue()" checked/>
               <label for="radio_input3" class="radio_label">All</label>
           </div>
-          <div class="result">
-            <div class="load--hidden"></div>
-            <div class="internal" (click)="pop()" *ngFor="let x of show_array;let index= index">
+
+          <!-- If movies radio button is selected -->
+          <div class="result" *ngIf="movie_info">
+            <div class="internal" (click)="pop()" *ngFor="let x of show_array">
               <div class="poster">
                 <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)" id="movie">
               </div>
@@ -54,11 +59,61 @@
               </ng-template>
             </div>  
           </div>
+
+          <!-- If TvSeries radio button is selected -->
+          <div class="result" *ngIf="tv_info">
+            <div class="internal" (click)="pop()" *ngFor="let x of show_array">
+              <div class="poster">
+                <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)" id="movie">
+              </div>
+              <ng-template #noPoster>
+                <img src="/assets/no-poster1.jpg" class="movie" (click)="getId(x.id)" id="movie">
+              </ng-template>
+              
+              <div class="information">
+                <h3 class="MovieTitle" *ngIf="x.original_name" (click)="getId(x.id)" id="MovieTitle">{{x.original_name}}</h3>
+                <h4 class="year" *ngIf="x.first_air_date; else noYear" (click)="getId(x.id)" id="year">{{x.first_air_date}}</h4>
+              </div>
+              <ng-template #noYear (click)="getId(x.id)">
+                <h4 class="year" id="year" (click)="getId(x.id)">—</h4>
+              </ng-template>
+            </div>  
+          </div>
+
+          <!-- If All radio button is selected -->
+          <div class="result" *ngIf="all_info">
+            <div class="internal" (click)="pop()" *ngFor="let x of show_array">
+              <div class="poster">
+                <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)" id="movie">
+              </div>
+              <ng-template #noPoster>
+                <img src="/assets/no-poster1.jpg" class="movie" (click)="getId(x.id)" id="movie">
+              </ng-template>
+              
+              <div class="information" *ngIf="x.media_type === 'movie'">
+                <h3 class="MovieTitle" *ngIf="x.media_type == 'movie' && x.title" (click)="getId(x.id)" id="MovieTitle">{{x.title}}</h3>
+                <h4 class="year" *ngIf="x.media_type == 'movie' && x.release_date; else noYear" (click)="getId(x.id)" id="year">{{x.release_date}}</h4>
+              </div>
+              <div class="information" *ngIf="x.media_type === 'tv'">
+                <h3 class="MovieTitle" *ngIf="x.media_type == 'tv' && x.original_name" (click)="getId(x.id)" id="MovieTitle">{{x.original_name}}</h3>
+                <h4 class="year" *ngIf="x.media_type == 'tv' && x.first_air_date; else noYearTv" (click)="getId(x.id)" id="year">{{x.first_air_date}}</h4>
+              </div>
+              <ng-template #noYear (click)="getId(x.id)">
+                <h4 class="year" id="year" (click)="getId(x.id)">—</h4>
+              </ng-template>
+              <ng-template #noYearTv (click)="getId(x.id)">
+                <h4 class="year" id="year" (click)="getId(x.id)">—</h4>
+              </ng-template>
+            </div>  
+          </div>
         </div>
 
         <div class="noMovie">
           <h1>Nothing Found</h1>
         </div>
+
+        <!-- Loading Animation -->
+        <div class="load--hidden"></div>
       </div>
     </div>
 
