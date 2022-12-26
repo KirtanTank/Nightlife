@@ -8,11 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
+import { RegisterComponent } from './register/register.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,11 @@
 
         <!-- The Title container -->
         <div class="title">
-          <p class="appTitle">Nightlife</p>
+          <p class="appTitle" routerLink="/">Nightlife</p>
+          <ul class="list">
+            <li class="list_comp" routerLink="/Register">Login/SignUp</li>
+            <li class="list_comp" routerLink="/Wishlist" >Wish List</li>
+          </ul>
         </div>
 
         <!-- The Search bar and Button container -->
@@ -38,6 +42,11 @@
               <label for="radio_input2" class="radio_label">Tv Series</label>
               <input type="radio" class="radio_input" id="radio_input3" value="All" name="values" (change)="radioValue()" checked/>
               <label for="radio_input3" class="radio_label">All</label>
+              <!-- <select name="filter" class="">
+                <option value="All" class="radio_label" (change)="radioValue()" selected>All</option>
+                <option value="Movies" class="radio_label" (change)="radioValue()">Movies</option>
+                <option value="TvSeries" class="radio_label" (change)="radioValue()">Tv Series</option>
+              </select> -->
           </div>
 
           <!-- If movies radio button is selected -->
