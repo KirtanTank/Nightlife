@@ -205,14 +205,17 @@ html{
                             transition: width 5s;
                             text-align: center;
 
-                            .movie{
-                                max-width: 200px;
-                                height: 300px;
-                                border-radius: 10px;
-                                box-sizing: border-box;
-                                box-shadow: 10px 10px 15px black;
-                                text-decoration: none;
+                            .poster{
+                                position: relative;
 
+                                .movie{
+                                    max-width: 200px;
+                                    height: 300px;
+                                    border-radius: 10px;
+                                    box-sizing: border-box;
+                                    box-shadow: 10px 10px 15px black;
+                                    text-decoration: none;
+                                }
                             }
 
                             .information{

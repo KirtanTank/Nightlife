@@ -54,6 +54,7 @@
             <div class="internal" (click)="pop()" *ngFor="let x of show_array">
               <div class="poster">
                 <img [src]="displayPoster(x.poster_path)" class="movie" *ngIf="x.poster_path != null; else noPoster" (click)="getId(x.id)" id="movie">
+                <!-- <div class="heart"><button class="like-button"></button></div> -->
               </div>
               <ng-template #noPoster>
                 <img src="/assets/no-poster1.jpg" class="movie" (click)="getId(x.id)" id="movie">
