@@ -165,17 +165,17 @@ export class HomeComponent implements OnInit {
 
   pop(){
     this.description = true;
-    for(let p = 0 ; p < this.tmdb_movie_array.length ; p++){
-      if(this.tmdb_movie_array[p].id === this.id){
-        this.name = this.tmdb_movie_array[p].title;
-        this.year = this.tmdb_movie_array[p].release_date;
-        this.poster = `https://image.tmdb.org/t/p/w500/${this.tmdb_movie_array[p].poster_path}`;
-        this.path = this.tmdb_movie_array[p].poster_path;
-        this.overview = this.tmdb_movie_array[p]?.overview;
-        this.rate = this.tmdb_movie_array[p].vote_average;
-        this.language = this.tmdb_movie_array[p].original_language;
-        this.popularity = this.tmdb_movie_array[p].popularity;
-        this.type = this.tmdb_movie_array[p].media_type;
+    for(let p = 0 ; p < this.show_array.length ; p++){
+      if(this.show_array[p].id === this.id){
+        this.show_array[p].title == undefined ? this.name = this.show_array[p].original_name : this.name = this.show_array[p].title;
+        this.show_array[p].release_date == undefined ? this.year = this.show_array[p].first_air_date : this.year = this.show_array[p].release_date;
+        this.poster = `https://image.tmdb.org/t/p/w500/${this.show_array[p].poster_path}`;
+        this.path = this.show_array[p].poster_path;
+        this.overview = this.show_array[p]?.overview;
+        this.rate = this.show_array[p].vote_average;
+        this.language = this.show_array[p].original_language;
+        this.popularity = this.show_array[p].popularity;
+        this.type = this.show_array[p].media_type;
       }
     }
   }

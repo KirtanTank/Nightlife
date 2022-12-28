@@ -128,7 +128,7 @@
     </div>
 
     <!-- Information Show -->
-    <div class="info" *ngIf="description" id="info">
+    <div class="info" *ngIf="description && (all_info || tv_info || movie_info)" id="info">
       <div class="mainPoster">
           <img src="{{poster}}" class="moviePoster" *ngIf="path != null ; else noPoster">
       </div>
