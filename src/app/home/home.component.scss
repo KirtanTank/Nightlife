@@ -156,7 +156,7 @@ html{
                     .genre--hidden{
                         visibility: 0;
                         opacity: 0;
-                        transition: 0.5s;
+                        scale: 0;
                     }
                     
                     .genre-choose{
@@ -170,6 +170,7 @@ html{
                         visibility: 1;
                         opacity: 1;
                         transition: 0.5s;
+                        scale: 1;
 
                         hr{
                             height: 0.5px;
@@ -373,8 +374,10 @@ html{
             flex-direction: row;
             border: none;
             border-radius: 50px;
-            visibility: hidden;
             overflow: hidden;
+            opacity: 0;
+            z-index: -99999;
+
 
             .cross{
                 border: 3px solid black;
@@ -403,21 +406,26 @@ html{
 
 
         .notification--show{
-            animation: 1s ease slide-left;
-            visibility: visible;
+            animation: fade 3s linear;
             overflow: hidden;
+            z-index: 99999;
         }
-        @keyframes slide-left {
-        from {
-            overflow: hidden;
-            opacity: 0;
-            transition: all 0.5s;
+        @keyframes fade {
+            0%{
+                opacity: 0;
+            }
+            25%{
+                opacity: 1;
+            }
+            50%{
+                opacity: 1;
+            }
+            75%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+            }
         }
-        to {
-            opacity: 1;
-            transition: all 0.5s;
-            overflow: hidden;
-        }
-        }
-    }
+}
 }

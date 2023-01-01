@@ -73,10 +73,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
   LoadMovie(searchTerm: any){
     searchTerm = this.search;
     this.description = false;
+    const add_radio = document.querySelector(".genre--hidden")!;
+    const parent = document.querySelector(".search-container")!;
     if(this.search != ""){
       setTimeout(() => {
         this.show = true;
@@ -87,8 +88,6 @@ export class HomeComponent implements OnInit {
       this.loadAnimation();
       // Enable the radio buttons
       this.closed = false;
-
-      const add_radio = document.querySelector(".genre--hidden");
       add_radio?.classList.add("genre-choose");
 
       const multiURL = `https://api.themoviedb.org/3/search/multi?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&query=${searchTerm}&page=1&include_adult=false`
@@ -140,6 +139,11 @@ export class HomeComponent implements OnInit {
     }
     else{
       this.noSearch();
+      add_radio?.classList.remove("genre-choose");
+      this.tmdb_new_array.splice(0, this.tmdb_new_array.length);
+      this.tmdb_movie_array.splice(0, this.tmdb_movie_array.length);
+      this.tmdb_tv_array.splice(0, this.tmdb_tv_array.length);
+      this.tmdb_scrap_array.splice(0, this.tmdb_scrap_array.length);
     }
   }
 
@@ -161,6 +165,7 @@ export class HomeComponent implements OnInit {
   noSearch(){
     const notify = document.querySelector(".notification");
     const searchbar = document.querySelector(".search"); 
+
     notify?.classList.add("notification--show");
     searchbar?.classList.add("shaking")
     setTimeout(() => {
