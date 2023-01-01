@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
   movie_info : boolean = false;
   tv_info : boolean = false;
   all_info : boolean = false;
+  closed : boolean = true;
 
   radioValue(){
     const movies = <HTMLInputElement> document.getElementById('radio_input1');
@@ -84,6 +85,11 @@ export class HomeComponent implements OnInit {
       this.radioValue();  
       // Load Animation
       this.loadAnimation();
+      // Enable the radio buttons
+      this.closed = false;
+
+      const add_radio = document.querySelector(".genre--hidden");
+      add_radio?.classList.add("genre-choose");
 
       const multiURL = `https://api.themoviedb.org/3/search/multi?api_key=1315531f53bb88b9f3c93447893c4b66&language=en-US&query=${searchTerm}&page=1&include_adult=false`
 

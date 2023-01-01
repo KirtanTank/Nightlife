@@ -35,8 +35,9 @@
 
         <div class="search-container">
           <!-- Choosing the genre by radio button -->
-          <div class="genre-choose">
-              <input type="radio" class="radio_input" id="radio_input1" value="Movies" name="values" (change)="radioValue()"/>
+            <div class="genre--hidden">
+              <hr>
+              <input type="radio" class="radio_input" id="radio_input1" value="Movies" name="values" (change)="radioValue()">
               <label for="radio_input1" class="radio_label">Movies</label>
               <input type="radio" class="radio_input" id="radio_input2" value="TvSeries" name="values" (change)="radioValue()"/>
               <label for="radio_input2" class="radio_label">Tv Series</label>
@@ -47,7 +48,7 @@
                 <option value="Movies" class="radio_label" (change)="radioValue()">Movies</option>
                 <option value="TvSeries" class="radio_label" (change)="radioValue()">Tv Series</option>
               </select> -->
-          </div>
+            </div>
 
           <!-- If movies radio button is selected -->
           <div class="result" *ngIf="movie_info">
