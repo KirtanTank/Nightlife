@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
           // No movie
           console.log(this.all_info, this.movie_info, this.tv_info);
           const newClass = document.querySelector(".noMovie");
-          if(this.tmdb_tv_array.length == 0){
+          if(this.show_array.length == 0){
             setTimeout(() => {
               newClass?.classList.add("noMovie--show");
             }, 500);
@@ -123,11 +123,7 @@ export class HomeComponent implements OnInit {
             newClass?.classList.remove("noMovie--show");
           }
           this.show_array = this.tmdb_new_array;
-          // console.log(this.tmbdArray);  
           console.log(this.tmdb_new_array);
-          // console.log(this.tmdb_movie_array);
-          // console.log(this.tmdb_tv_array);
-          // console.log(this.tmdb_scrap_array);
         }).catch(err => {
           console.log(err);
         });
