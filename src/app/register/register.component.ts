@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -60,7 +60,8 @@ export class RegisterComponent {
     }  
   }
 
-  constructor() { 
+  constructor(private http : HttpClient) { 
+    this.http.get;
   }
 
   ngOnInit(): void {
