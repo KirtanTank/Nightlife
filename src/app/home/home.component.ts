@@ -46,6 +46,8 @@ export class HomeComponent implements OnInit {
   all_info : boolean = false;
   closed : boolean = true;
 
+  radio_value : any;
+
   radioValue(){
     const movies = <HTMLInputElement> document.getElementById('radio_input1');
     const tv = <HTMLInputElement> document.getElementById('radio_input2');
@@ -55,6 +57,7 @@ export class HomeComponent implements OnInit {
       this.movie_info = false;
       this.tv_info = false;
       this.show_array = this.tmdb_new_array;
+      this.radio_value = all.value;
       console.log(this.show_array);
     }
     else if(tv.checked){
@@ -62,14 +65,18 @@ export class HomeComponent implements OnInit {
       this.movie_info = false;
       this.all_info = false;
       this.show_array = this.tmdb_tv_array;
+      this.radio_value = tv.value;
       console.log(this.show_array);
+      console.log(this.radio_value);
     }
     else if(movies.checked){
       this.movie_info = true;
       this.tv_info = false;
       this.all_info = false;
       this.show_array = this.tmdb_movie_array;
+      this.radio_value = movies.value;
       console.log(this.show_array);
+      console.log(this.radio_value);
     }
   }
 
@@ -109,12 +116,22 @@ export class HomeComponent implements OnInit {
               this.tmdb_scrap_array.push(this.tmbdArray[m]);
             }
           }
+          // console.log(this.radio_value);
           // Combining Two Arrays
           this.tmdb_new_array = this.tmdb_movie_array.concat(this.tmdb_tv_array);
           // No movie
-          console.log(this.all_info, this.movie_info, this.tv_info);
+          // console.log(this.all_info, this.movie_info, this.tv_info);
+          // console.log(this.tmdb_tv_array);
           const newClass = document.querySelector(".noMovie");
-          if(this.show_array.length == 0){
+          if((this.tmdb_movie_array.length == 0) && this.radio_value == "Movies"){
+            setTimeout(() => {
+              newClass?.classList.add("noMovie--show");
+            }, 500);
+          }
+          else{
+            newClass?.classList.remove("noMovie--show");
+          }
+          if((this.tmdb_tv_array.length == 0) && this.radio_value == "TvSeries"){
             setTimeout(() => {
               newClass?.classList.add("noMovie--show");
             }, 500);
@@ -123,7 +140,7 @@ export class HomeComponent implements OnInit {
             newClass?.classList.remove("noMovie--show");
           }
           this.show_array = this.tmdb_new_array;
-          console.log(this.tmdb_new_array);
+          // console.log(this.tmdb_new_array);
         }).catch(err => {
           console.log(err);
         });
@@ -143,8 +160,8 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Loading Animation
   loadAnimation(){
-    // Loading Animation
     const a = document.querySelector('.load--hidden');
     a?.classList.remove("load--hidden");
     a?.classList.add("load");
@@ -158,6 +175,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // In case of No Search
   noSearch(){
     const notify = document.querySelector(".notification");
     const searchbar = document.querySelector(".search"); 
