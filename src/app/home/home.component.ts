@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
       this.tv_info = false;
       this.show_array = this.tmdb_new_array;
       this.radio_value = all.value;
-      console.log(this.show_array);
+      // console.log(this.show_array);
     }
     else if(tv.checked){
       this.tv_info = true;
@@ -66,8 +66,8 @@ export class HomeComponent implements OnInit {
       this.all_info = false;
       this.show_array = this.tmdb_tv_array;
       this.radio_value = tv.value;
-      console.log(this.show_array);
-      console.log(this.radio_value);
+      // console.log(this.show_array);
+      // console.log(this.radio_value);
     }
     else if(movies.checked){
       this.movie_info = true;
@@ -75,8 +75,8 @@ export class HomeComponent implements OnInit {
       this.all_info = false;
       this.show_array = this.tmdb_movie_array;
       this.radio_value = movies.value;
-      console.log(this.show_array);
-      console.log(this.radio_value);
+      // console.log(this.show_array);
+      // console.log(this.radio_value);
     }
   }
 
